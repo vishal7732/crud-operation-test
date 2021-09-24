@@ -1,0 +1,58 @@
+{% if user.is_authenticated %}
+
+<p><i class="flaticon-user"></i> {{ user.first_name }} | <a href="/logout">Logout</a></p>
+<a href="product/">Products</a>
+<div align="center";>
+{% for pro in products %}
+
+<h2><b>Name:</b> {{ pro.name }}{{ pro.id }}</h2>
+<p><b>Tags: </b>{{ pro.tag.all|join:", " }}</p>
+<p><b>Category: </b>{{ pro.Category }}  <a href="/product/edit/{{ pro.id }}">edit</a></p>
+<p><img class="img-fluid" src="{{ pro.image.url }}" width="60" height="60"></p>
+<p><b>Description: </b>{{ pro.describtion }}</p>
+<hr>
+
+{% endfor %}</div>
+{% else %}
+<form action="/" method="POST" style="max-width:500px;margin:auto">
+    <h2>Register Form</h2>
+    {% csrf_token %}
+    <br>
+    
+    <div class="input-container">
+      <i class="fa fa-user icon"></i>
+      <input class="input-field" type="text" placeholder="First Name" name="first_name">
+    </div>
+    <div class="input-container">
+      <i class="fa fa-user icon"></i>
+      <input class="input-field" type="text" placeholder="Last Name" name="last_name">
+    </div>
+
+    <div class="input-container">
+      <i class="fa fa-user icon"></i>
+      <input class="input-field" type="text" placeholder="Username" name="username">
+    </div>
+  
+    <div class="input-container">
+      <i class="fa fa-envelope icon"></i>
+      <input class="input-field" type="text" placeholder="Email" name="email">
+    </div>
+    
+    <div class="input-container">
+      <i class="fa fa-key icon"></i>
+      <input class="input-field" type="password" placeholder="Password" name="password1">
+    </div>
+
+    <div class="input-container">
+      <i class="fa fa-key icon"></i>
+      <input class="input-field" type="password" placeholder="Confirm Password" name="password2">
+    </div>
+    <div>
+      {% for messages in messages %}
+      {{messages}}
+      {% endfor %}
+    </div>
+    <button type="submit" class="btn">Register</button>
+    <a href="/login">Login</a>
+    
+  </form> {% endif %}

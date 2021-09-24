@@ -1,0 +1,24 @@
+<form action="login" method="POST" style="max-width:500px;margin:auto">
+    <h2>Login Form</h2>
+    {% csrf_token %}
+    <br>
+    
+
+    <div class="input-container">
+      <i class="fa fa-user icon"></i>
+      <input class="input-field" type="text" placeholder="Username" name="username">
+    </div>
+  
+   
+    <div class="input-container">
+      <i class="fa fa-key icon"></i>
+      <input class="input-field" type="password" placeholder="Password" name="password">
+    </div>
+    <div>
+      {% for messages in messages %}
+      {{messages}}
+      {% endfor %}
+    </div>
+    
+    <button type="submit" class="btn">Login</button>
+  </form>
